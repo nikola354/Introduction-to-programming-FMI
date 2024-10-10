@@ -19,7 +19,7 @@
 
 4. Create a branch 
     - You should create branch for each **3 tasks**.
-    - The branch should be created from the master branch of the original repository. In this way you will always have the latest changes .
+    - The branch should be created from the main branch of the original repository. In this way you will always have the latest changes .
     - [About branches.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches)
     - [How to create branch.](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/managing-branches#creating-a-branch)
 
@@ -35,9 +35,9 @@
       Then create a new branch and start from step 4.
     - [About commits.](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/committing-and-reviewing-changes-to-your-project#about-commits)
 
-7. Open PR to the original repository to the master branch
+7. Open PR to the original repository to the main branch
     - [How to create pull request.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
-    - The pull request should request to merge the changes of your branch in the fork to the master branch of the original repositor.
+    - The pull request should request to merge the changes of your branch in the fork to the main branch of the original repositor.
     - **The title of the Pull Request should be:**
         ```
         Pract.\<number\>: Add \<first task number\> - \<last task number\> | \<name\>
