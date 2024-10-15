@@ -1,18 +1,32 @@
-// Да се напише програма, която получава 5 латински букви. Първите две от тях са главни и 
-// образуват множеството A, където A съдържа всички букви между въпросните две букви, 
-// включително самите тях. Вторите две букви са малки и образуват множеството B, където 
-// B съдържа всички букви между тях, включително самите тях.
 #include <iostream>
-int main() {
-    char a, b, c, d, e;
-    std::cin >> a >> b >> c >> d >> e;
 
-    bool inUnion = (a < e < b || c < e < d);
-    std::cout << std::boolalpha << inUnion << std::endl;
+using namespace std;
 
-    bool inIntersection = (a < e < b && c < e < d);
-    std::cout << std::boolalpha << inIntersection << std::endl;
-        
-    std::cout << std::boolalpha << (a < e < b && !(c < e < d)) << std::endl;
-    std::cout << std::boolalpha << inUnion && !inIntersection << std::endl;
+int main()
+{
+	const char CAPITAL_TO_LOWER = 'a' - 'A';
+
+	char capitalStart, capitalEnd, lowerStart, lowerEnd, symbol;
+	cin >> capitalStart >> capitalEnd >> lowerStart >> lowerEnd >> symbol;
+
+	if (symbol >= 'A' && symbol <= 'Z')
+	{
+		symbol += CAPITAL_TO_LOWER;
+	}
+
+	capitalStart += CAPITAL_TO_LOWER;
+	capitalEnd += CAPITAL_TO_LOWER;
+
+	bool isInFirst = symbol >= capitalStart && symbol <= capitalEnd;
+	bool isInSecond = symbol >= lowerStart && symbol <= lowerEnd;
+
+	bool isUnion = isInFirst || isInSecond;
+	bool isIntersection = isInFirst && isInSecond;
+	bool isDifference = isInFirst && !isInSecond;
+	bool isInOnlySet = isUnion && !isIntersection;
+
+	cout << (isUnion ? "true" : "false") << endl;
+	cout << (isIntersection ? "true" : "false") << endl;
+	cout << (isDifference ? "true" : "false") << endl;
+	cout << (isInOnlySet ? "true" : "false") << endl;
 }
