@@ -1,21 +1,38 @@
-// Да се състави програма, чрез която се въвежда 4-цифренo естествено число от интервала [1000.. 9999]. 
-// От това число се формират 2 нови 2-цифрени числа. Първото число се формира от 1-та и 4-та цифра 
-// на въведеното число. Второто число се формира от 2-рa - 3-та цифра на въведеното число. 
-// На екрана да се изведе дали 1-то ново число e по-малко <, равно = или по-голямо от 2-то число.
-#include <iostream>;
-int main() {
-    int number;
-    std::cin >> number;
-    int num1 = (number / 1000) * 10 + number % 10;
-    int num2 = (number / 100 % 10) * 10 + (number / 10) % 10;
+#include <iostream>
 
-    if (num1 < num2) {
-        std::cout << "less ( " << num1 << " < " << num2 << " )\n";
-    }
-    else if (num1 > num2) {
-        std::cout << "greater ( " << num1 << " > " << num2 << " )\n";
-    }
-    else {
-        std::cout << "equal ( " << num1 << " = " << num2 << " )\n";
-    }
+using namespace std;
+
+int main()
+{
+	int n;
+	cin >> n;
+
+	int firstDigit = n / 1000;
+	n %= 1000;
+
+	int secondDigit = n / 100;
+	n %= 100;
+
+	int thirdDigit = n / 10;
+	n %= 10;
+
+	int fourthDigit = n;
+
+	int firstNum = firstDigit * 10 + fourthDigit;
+	int secondNum = secondDigit * 10 + thirdDigit;
+
+	if (firstNum < secondNum)
+	{
+		cout << "Less: (" << firstNum << " < " << secondNum << ")";
+	}
+	else if (firstNum == secondNum)
+	{
+		cout << "Equal: (" << firstNum << " = " << secondNum << ")";
+	}
+	else
+	{
+		cout << "Bigger: (" << firstNum << " > " << secondNum << ")";
+	}
+
+	return 0;
 }
