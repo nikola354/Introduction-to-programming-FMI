@@ -7,8 +7,12 @@ int main() {
     char a, b, c, d, e;
     std::cin >> a >> b >> c >> d >> e;
 
-    std::cout << std::boolalpha << (a < e < b || c < e < d) << std::endl;
-    std::cout << std::boolalpha << (a < e < b && c < e < d) << std::endl;
+    bool inUnion = (a < e < b || c < e < d);
+    std::cout << std::boolalpha << inUnion << std::endl;
+
+    bool inIntersection = (a < e < b && c < e < d);
+    std::cout << std::boolalpha << inIntersection << std::endl;
+        
     std::cout << std::boolalpha << (a < e < b && !(c < e < d)) << std::endl;
-    std::cout << std::boolalpha << (a < e < b && !(c < e < d) || !(a < e < b) && (c < e < d)) << std::endl;
+    std::cout << std::boolalpha << inUnion && !inIntersection << std::endl;
 }
