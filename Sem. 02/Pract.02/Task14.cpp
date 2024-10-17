@@ -1,28 +1,14 @@
 #include <iostream>
-
-int main() {
-    float n1, n2;
-    char operation;
-
-    std::cin >> n1 >> operation >> n2;
-
-    switch (operation)  {
-    case '+':
-        std::cout <<  n1 + n2 << std::endl;
-        break;
-    case '-':
-        std::cout <<  n1 - n2 << std::endl;
-        break;
-    case '*':
-        std::cout <<  n1 * n2 << std::endl;
-        break;
-    case '/':
-        std::cout <<  n1 / n2 << std::endl;
-        break;
-    default:
-        std::cout << "Invalid operation" << std::endl;
-        break;
+int main(){
+  	double firstNum, secondNum;
+    char ch;
+    std::cin>>firstNum >> ch >> secondNum;
+    switch (ch) {
+        case('+'): std::cout<< firstNum + secondNum; break;
+        case('-'): std::cout<< firstNum - secondNum; break;
+        case('*'): std::cout<< firstNum * secondNum; break;
+        case('/'): std::cout<< firstNum / secondNum; break;
+        default: std::cout<< "Invalid input";
     }
-
     return 0;
 }

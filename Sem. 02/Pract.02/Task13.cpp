@@ -1,17 +1,13 @@
 #include <iostream>
-
-int main() {
-    int x, y, r;
-    std::cin >> r >> x >> y;
-
-    // uravnenie na orkujnost
-    if (x * x + y * y == r * r) {
-        std::cout << "On the circle" << std::endl;
-    } else if (x * x + y * y < r * r) {
-        std::cout << "In the circle" << std::endl;
-    } else {
-        std::cout << "Out of the circle" << std::endl;
-    }
-
-    return 0;
+#include <cmath>
+int main(){
+ int radius,pointX,pointY;
+ std::cin>>radius>>pointX>>pointY;
+ double distanceToPoint = sqrt(pointX*pointX + pointY*pointY);
+ if(distanceToPoint < radius){
+     std::cout<<"In the circle";
+ }else if (distanceToPoint == radius) {
+     std::cout<<"On the cirlce";
+ }else
+     std::cout<<"Out of the circle";
 }

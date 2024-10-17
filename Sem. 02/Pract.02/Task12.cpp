@@ -1,14 +1,11 @@
 #include <iostream>
-
-int main() {
-    float a, b, c;
-    std::cin >> a >> b >> c;
-
-    if ((a + b > c) && (a + c > b) && (b + c > a)) {
-        std::cout << "This triangle exists." << std::endl;
-    } else {
-        std::cout << "This triangle doesn't exist." << std::endl;
-    }
-
+int main(){
+    double fisrtSide,secondSide,thirdSide;
+    std::cin>>fisrtSide>>secondSide>>thirdSide;
+    bool marker_1 = fisrtSide + secondSide > thirdSide;
+    bool marker_2 = thirdSide + secondSide > fisrtSide;
+    bool marker_3 = fisrtSide + thirdSide > secondSide;
+    if(marker_1 && marker_2 && marker_3) std::cout<<"This thriangle exists.";
+    else std::cout<<"This triangle doesn't exist.";
     return 0;
 }
