@@ -1,6 +1,6 @@
 #include <iostream>
 int main() {
-    int num,n,k,sum;
+    int num,n,k,sum,maxDifference;
     std::cin>>num>>n>>k;
     if(n>k)maxDifference=n-k
     else maxDifference = k-n;
