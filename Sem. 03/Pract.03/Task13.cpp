@@ -1,7 +1,9 @@
 #include <iostream>
 int main() {
-    int num,n,k,sum,maxDifference=0;
+    int num,n,k,sum;
     std::cin>>num>>n>>k;
+    if(n>k)maxDifference=n-k
+    else maxDifference = k-n;
     sum = n + k;
     bool isEqual=true;
     for(int i=1;i<num;i++){
