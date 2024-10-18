@@ -29,7 +29,7 @@ int main()
 			copyK /= 10;
 		}
 
-		if (isSuffix)
+		if (isSuffix && copyNum == 0)
 		{
 			std::cout << num << " is suffix of " << k << std::endl;
 			count++;
