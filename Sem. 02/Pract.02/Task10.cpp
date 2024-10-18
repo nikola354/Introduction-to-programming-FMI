@@ -1,20 +1,35 @@
 #include <iostream>
 
-int main() {
-    int a, b, c;
-    std::cin >> a >> b >> c;
+using namespace std;
 
-    if (a > b) {
-        if (a > c) {
-            if (b > c) {
-                std::cout << c << " " << b << " " << a << std::endl;
-            } else {
-                std::cout << b << " " << c << " " << a << std::endl;
-            }
-        } else {
-            
-        }
-    }
+int main()
+{
+	int a, b, c;
 
-    return 0;
+	cin >> a >> b >> c;
+
+	if (a > b)
+	{
+		int temp = a;
+		a = b;
+		b = temp;
+	}
+
+	if (b > c)
+	{
+		int temp = b;
+		b = c;
+		c = temp;
+	}
+
+	if (a > c)
+	{
+		int temp = a;
+		a = c;
+		c = temp;
+	}
+
+	cout << a << " " << b << " " << c << endl;
+
+	return 0;
 }
