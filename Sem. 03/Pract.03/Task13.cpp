@@ -2,7 +2,7 @@
 int main() {
     int num, n, k, sum, maxDifference = 0;
     std::cin >> num;
-    if (num == 0) return 0;
+    if (num <= 0) return 0;
     std::cin >> n >> k;
 
     if (n > k) maxDifference = n - k;
