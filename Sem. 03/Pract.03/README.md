@@ -296,14 +296,16 @@ No
 
 **Задача 16**: Да се напише програма, която приема цяло положително число n и отпечатва числата от 1 до n*n в спираловиден вид.
 
-![image](https://github.com/user-attachments/assets/39608eb1-288e-4e22-93f5-88c6b0325ce4)
+![image](https://github.com/user-attachments/assets/b1b0a61b-1d22-467b-af7b-1cd81ad67b93)
 
 
 **Задача 17**: Да се напише програма, която прочита от конзолата цяло нечетно число n и чертае вертикална стрелка с размери като в примерите по-долу:
 
-![image](https://github.com/user-attachments/assets/f98740e5-1e5d-4cfc-b482-08f9622989b1)
+![image](https://github.com/user-attachments/assets/04bc695c-7833-49fb-8d10-a32919182869)
 
-![image](https://github.com/user-attachments/assets/3dcca718-b2f1-485f-8fdf-99aa677ea495)
+![image](https://github.com/user-attachments/assets/f4f2fa5d-4308-453b-b87f-a6f653ad77d4)
+
+
 
 
 
