@@ -13,6 +13,5 @@ int main() {
         armstrong += std::pow((copyOfN%10),length);
         copyOfN/=10;
     }
-    if(n==armstrong) std::cout<<true;
-    else std::cout<<false;
+    std::cout<<(n==armstrong);
 }
