@@ -7,6 +7,6 @@ int main() {
         return 0;
     }
     for(int i=n;i<=m;i++){
-        std::cout<<i<<" --> " <<char(i)<<"\n";
+        std::cout<<i<<" --> " <<(char)i<<"\n";
     }
 }
