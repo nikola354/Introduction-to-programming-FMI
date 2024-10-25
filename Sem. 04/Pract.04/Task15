@@ -40,5 +40,6 @@ int sortDigits(unsigned int number)
 
 int main()
 {
-    cout << sortDigits(100454653);
+    cout << sortDigits(4791257) << std::endl;
+    cout << sortDigits(1000) << std::endl;
 }
