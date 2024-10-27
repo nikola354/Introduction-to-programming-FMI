@@ -1,28 +1,37 @@
 #include <iostream>;
+
 int gcd(int a, int b);
 int lcm(int a, int b);
 void gcdAndLcmOfMultipleNumbers();
 
-int main(){
-    gcdAndLcmOfMultipleNumbers();
+int main()
+{
+    	gcdAndLcmOfMultipleNumbers();
+
+	return 0;
 }
 
 int gcd(int a, int b) {
-	int gcd = a > b ? b : a;
-
-	while (gcd > 1) {
-		if (a % gcd == 0 && b % gcd == 0)
-			break;
-		gcd--;
+	if (a < b)
+	{
+		int temp = a;
+		a = b;
+		b = temp;
 	}
 
-	return gcd;
+	while (b != 0)
+	{
+		int mod = a % b;
+		a = b;
+		b = mod;
+	}
+
+	return a;
 }
 
 int lcm(int a, int b) {
 	return (a / gcd(a, b)) * b;
 }
-
 
 void gcdAndLcmOfMultipleNumbers() {
 	int a, n;
