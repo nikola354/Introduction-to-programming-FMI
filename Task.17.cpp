@@ -11,10 +11,9 @@ int getDivision(int first, int second) {
 
     int sign = (((first * second) > 0) ? +1 : -1);
 
-    if (first < 0 || second < 0) {
-        first = getAbs(first);
-        second = getAbs(second);
-    }
+    first = getAbs(first);
+    second = getAbs(second);
+    
 
     int count = 0;
     while (first - second >= 0) {
