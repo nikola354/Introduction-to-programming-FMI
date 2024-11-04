@@ -17,7 +17,7 @@
 3. Fetch origin
     - ![fetch origin](images/fetch-origin.png)
 
-4. Create a branch 
+4. Create a branch **(optional)**
     - You should create branch for each **3 tasks**.
     - The branch should be created from the main branch of the original repository. In this way you will always have the latest changes .
     - [About branches.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches)
