@@ -111,7 +111,7 @@ unsigned int input()
 	return n;
 }
 
-void runGane()
+void runGame()
 {
 	unsigned int toGuess = input();
 	std::cout << "Success! You provided a valid secret code!" << std::endl;
@@ -132,7 +132,7 @@ void runGane()
 
 int main()
 {
-	runGane();
+	runGame();
 
 	return 0;
 }
