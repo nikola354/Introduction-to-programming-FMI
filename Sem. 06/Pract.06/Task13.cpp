@@ -1,7 +1,9 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SIZE = 100;
+constexpr int MAX_SIZE = 100;
+
+bool checkIfResultHasElement(const int[], int, int);
 
 void unionArrays(const int[], int, const int[], int, int[], int &);
 
@@ -30,17 +32,19 @@ int main() {
     return 0;
 }
 
+bool checkIfResultHasElement(const int result[], int size, int element) {
+    for (int j = 0; j < size; j++) {
+        if (element == result[j]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void unionArrays(const int arr1[], int size1, const int arr2[], int size2, int result[], int& size3) {
     for(int i = 0; i < size1; i++) {
-        bool isPresent = false;
-
-        // check if element is already in result
-        for (int j = 0; j < size3; j++) {
-            if (arr1[i] == result[j]) {
-                isPresent = true;
-                break;
-            }
-        }
+        bool isPresent = checkIfResultHasElement(result, size3, arr1[i]);
 
         if (!isPresent) {
             result[size3] = arr1[i];
@@ -49,15 +53,7 @@ void unionArrays(const int arr1[], int size1, const int arr2[], int size2, int r
     }
 
     for(int i = 0; i < size2; i++) {
-        bool isPresent = false;
-
-        // check if element is already in result
-        for (int j = 0; j < size3; j++) {
-            if (arr2[i] == result[j]) {
-                isPresent = true;
-                break;
-            }
-        }
+        bool isPresent = checkIfResultHasElement(result, size3, arr2[i]);
 
         if (!isPresent) {
             result[size3] = arr2[i];
@@ -70,14 +66,7 @@ void intersectionArrays(const int arr1[], int size1, const int arr2[], int size2
     for (int i = 0; i < size1; i++) {
         for (int j = 0; j < size2; j++) {
             if (arr1[i] == arr2[j]) {
-                bool isPresent = false;
-                // check if alredy is in result
-                for (int k = 0; k < size3; k++) {
-                    if (arr1[i] == result[k]) {
-                        isPresent = true;
-                        break;
-                    }
-                }
+                bool isPresent = checkIfResultHasElement(result, size3, arr1[i]);
 
                 if (!isPresent) {
                     result[size3] = arr1[i];
