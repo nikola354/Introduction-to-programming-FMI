@@ -1,12 +1,31 @@
 #include <iostream>
 using namespace std;
 
-const int DIGIT_SIZE = 5;
+constexpr int DIGIT_SIZE = 5;
 
 void printArray(const int[], int);
 
+void addOneToArray(int[]);
+
 int main() {
     int num[DIGIT_SIZE] = { 0, 1, 0, 0, 9 };
+
+    addOneToArray(num);
+
+    printArray(num, DIGIT_SIZE); 
+
+    return 0;
+}
+
+void printArray(const int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+
+    cout << endl;
+}
+
+void addOneToArray(int num[]) {
     int memory = 0;
 
     num[DIGIT_SIZE - 1]++;
@@ -27,16 +46,4 @@ int main() {
             }
         }
     }
-
-    printArray(num, DIGIT_SIZE); 
-
-    return 0;
-}
-
-void printArray(const int arr[], int size) {
-    for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
-    }
-
-    cout << endl;
 }
