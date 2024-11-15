@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SIZE = 50;
+constexpr int MAX_SIZE = 50;
 
 bool chekcIfDistinct(const int arr[], int size) {
     for (int i = 0; i < size - 1; i++) {
@@ -24,5 +24,5 @@ int main() {
         cin >> arr[i];
     }
 
-    cout << boolalpha << chekcIfDistinct(arr, n) << endl;
+    cout << (chekcIfDistinct(arr, n) ? "true" : "false") << endl;
 }

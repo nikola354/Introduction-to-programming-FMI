@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SIZE = 50;
-const int MAX_ELEMENT = 30;
+constexpr int MAX_SIZE = 50;
+constexpr int MAX_ELEMENT = 30;
 
 bool chekcIfDistinct(const int arr[], int size) {
     int seen[MAX_ELEMENT] = { false };
@@ -29,5 +29,5 @@ int main() {
         cin >> arr[i];
     }
 
-    cout << boolalpha << chekcIfDistinct(arr, n) << endl;
+    cout << (chekcIfDistinct(arr, n) ? "true" : "false") << endl;
 }
