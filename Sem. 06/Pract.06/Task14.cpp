@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SIZE = 100;
+constexpr int MAX_SIZE = 100;
 
 void mergeArrays(const int[], int, const int[], int, int[], int &);
 
@@ -25,26 +25,18 @@ void mergeArrays(const int arr1[], int size1, const int arr2[], int size2, int r
 
     while (i < size1 && j < size2) {
         if (arr1[i] > arr2[j]) {
-            result[size3] = arr2[j];
-            size3++;
-            j++;
+            result[size3++] = arr2[j++];
         } else {
-            result[size3] = arr1[i];
-            size3++;
-            i++;
+            result[size3++] = arr1[i++];
         }
     }
 
     while (i < size1) {
-        result[size3] = arr1[i];
-        i++;
-        size3++;
+        result[size3++] = arr1[i++];
     }
     
     while (j < size2) {
-        result[size3] = arr2[j];
-        j++;
-        size3++;
+        result[size3++] = arr2[j++];
     }
 }
 
