@@ -7,7 +7,7 @@ int main() {
     int arr1[4] = { 1, 2, 3, 4 };
     int arr2[3] = { 1, 2, 3 };
     
-    cout << boolalpha << findSubarray(arr1, 4, arr2, 3) << endl;
+    cout << (findSubarray(arr1, 4, arr2, 3) ? "true" : "false") << endl;
 
     return 0;
 }
