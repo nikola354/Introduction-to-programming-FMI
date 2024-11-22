@@ -1,83 +1,78 @@
-#include <iostream>;
-void readArray(int* arr, int& size);
-void printArray(const int* arr, int len);
-bool contains(const int* arr, const int len, int searchedValue);
-void unite(const int* arr1, const int size1, const int* arr2, const int size2, int* result, int& size);
-void intersect(const int* arr1, const int size1, const int* arr2, const int size2, int* result, int& size);
-
+#include <iostream>
+using namespace std;
 
 constexpr int MAX_SIZE = 100;
-int main()
-{
-	int arr1[MAX_SIZE];
-	int arrSize1 = 0;
-    int arr2[MAX_SIZE];
-	int arrSize2 = 0;
-	int united[MAX_SIZE];
-	int unitedSize = 0;
-    int intersected[MAX_SIZE];
-	int intersectedSize = 0;
-	readArray(arr1, arrSize1);
-    readArray(arr2, arrSize2);
-    unite(arr1, arrSize1, arr2, arrSize2, united, unitedSize);
-    intersect(arr1, arrSize1, arr2, arrSize2, intersected, intersectedSize);
 
-    std::cout << "Union: ";
-	printArray(united, unitedSize);
-	std::cout <<'\n' << "Intersection: ";
-    printArray(intersected, intersectedSize);
+bool checkIfResultHasElement(const int[], int, int);
+
+void unionArrays(const int[], int, const int[], int, int[], int&);
+
+void intersectionArrays(const int[], int, const int[], int, int[], int&);
+
+void printArray(const int[], int);
+
+int main() {
+	int arr1[5] = { 2, 4, 1, 7, 8 };
+	int arr2[4] = { 1, 2, 3, 5 };
+
+	int unionArray[MAX_SIZE];
+	int unionArrLength = 0;
+
+	int intersectionArray[MAX_SIZE];
+	int interArrLength = 0;
+
+	unionArrays(arr1, 5, arr2, 4, unionArray, unionArrLength);
+	cout << "Union: ";
+	printArray(unionArray, unionArrLength);
+
+	intersectionArrays(arr1, 5, arr2, 4, intersectionArray, interArrLength);
+	cout << "Intersection: ";
+	printArray(intersectionArray, interArrLength);
+
+	return 0;
 }
 
-void readArray(int* arr, int& size) {
-	while (size < MAX_SIZE) {
-		char ch;
-		std::cin.get(ch);
-		if (ch == '[' || ch == ' ') {
-			int num;
-			std::cin >> num;
-			arr[size] = num;
-			size++;
-		}
-		else if (ch == ',') continue;
-		else if (ch == ']')	return;
-	}
-}
-
-void printArray(const int* arr, int len) {
-	for (int i = 0; i < len; i++)
-		std::cout << arr[i] << " ";
-}
-
-bool contains(const int* arr, const int len, int searchedValue) {
-	for (int i = 0; i < len; i++)
-		if (arr[i] == searchedValue)
+bool checkIfResultHasElement(const int result[], int size, int element) {
+	for (int j = 0; j < size; j++) {
+		if (element == result[j]) {
 			return true;
+		}
+	}
+
 	return false;
 }
 
-void unite(const int* arr1, const int size1, const int* arr2, const int size2, int* result, int& size) {
-	for (int i = 0; i < size1; i++, size++)
-		result[size] = arr1[i];
+void unionArrays(const int arr1[], int size1, const int arr2[], int size2, int result[], int& size3) {
+	for (int i = 0; i < size1; i++) {
+		bool isPresent = checkIfResultHasElement(result, size3, arr1[i]);
 
-	for (int j = 0; j < size2; j++)
-	{
-		if (!contains(result, size, arr2[j])) {
-			result[size] = arr2[j];
-			size++;
+		if (!isPresent) {
+			result[size3++] = arr1[i];
+		}
+	}
+
+	for (int i = 0; i < size2; i++) {
+		bool isPresent = checkIfResultHasElement(result, size3, arr2[i]);
+
+		if (!isPresent) {
+			result[size3++] = arr2[i];
 		}
 	}
 }
 
-void intersect(const int* arr1, const int size1, const int* arr2, const int size2, int* result, int& size) {
-	// more efficient way will be to order the arrays but them they will not be constants
+void intersectionArrays(const int arr1[], int size1, const int arr2[], int size2, int result[], int& size3) {
 	for (int i = 0; i < size1; i++) {
-		for (int j = 0; j < size2; j++)
+		if (checkIfResultHasElement(arr2, size2, arr1[i]) && !checkIfResultHasElement(result, size3, arr1[i]))
 		{
-			if ((arr1[i] == arr2[j]) && !contains(result, size, arr1[i])) {
-				// EDGE CASE: if arr1 and arr2 contain repeating elements we do not want to add them to the result
-				result[size] = arr1[i];
-				size++;
-			}
+			result[size3++] = arr1[i];
 		}
 	}
+}
+
+void printArray(const int arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		cout << arr[i] << " ";
+	}
+
+	cout << endl;
 }
