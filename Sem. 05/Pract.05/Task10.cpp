@@ -1,41 +1,39 @@
-// Задача 10: Напишете програма, която по подадени 3 цели числа a, b и k прехвърля последните k цифри на a в началото на b.
 #include <iostream>
-int getNumLength(int num);
-int pow(int number, int power);
-void moveKDigitsToBeginning(int& a, int& b, int k);
 
-int main() {
-    std::cout << "Enter two number [a b] and how many nums from a's end to move the b's beginning [k]: ";
-    int a, b, k;
-    std::cin >> a >> b >> k;
-    std::cout << "\n";
-    moveKDigitsToBeginning(a, b, k);
-}
+int powOfTen(int k) {
+	int powerOfTen = 1;
 
-
-int getNumLength(int num) {
-	int numDigits = 0;
-	for (int temp = num; temp > 0; temp /= 10)
-		numDigits++;
-	return numDigits;
-}
-
-int pow(int number, int power) {
-	if (power == 0) return 1;
-
-	for (int i = number; power > 1; power--)
-		number *= i;
-	return number;
-}
-
-void moveKDigitsToBeginning(int& a, int& b, int k) {
-	int aLastDigits = 0, power = 1, bDigitCount = getNumLength(b);
-	while (k > 0) {
-		aLastDigits += (a % 10) * power;
-		power *= 10;
-		a /= 10;
+	while (k != 0) {
+		powerOfTen *= 10;
 		k--;
 	}
-	b = aLastDigits * pow(10, bDigitCount) + b;
+
+	return powerOfTen;
+}
+
+int getNumberLength(int b) {
+	int length = 0;
+
+	while (b != 0) {
+		length++;
+		b /= 10;
+	}
+
+	return length;
+}
+
+void newNumbers(int& a, int& b, int k) {
+	int tempLastKDigits = a % powOfTen(k);
+
+	b = tempLastKDigits * powOfTen(getNumberLength(b)) + b;
+	a /= powOfTen(k);
+}
+
+int main() {
+	int a, b, k;
+	std::cin >> a >> b >> k;
+
+	newNumbers(a, b, k);
+
 	std::cout << a << " " << b;
 }
