@@ -1,35 +1,53 @@
-#include<iostream>
-using namespace std; 
-int reverse(int number){
-    int digit,newnum=0;
-    while(number>0){
-        digit=number%10;
-        newnum=newnum*10+digit;
-        number/=10;
-    } return newnum;
-    }
-int even(int& number){
- int reversednumber=reverse(number);
- int evennum=0;
- reversednumber/=10;
- while(reversednumber>0){
-    int digit=reversednumber%10;
-    evennum=evennum*10+digit;
-    reversednumber/=100;
- } return evennum;
-} 
-int odd(int& number){
-    int reversednumber=reverse(number);
-    int oddnum=0;
-    while(reversednumber>0){
-        int digit=reversednumber%10;
-        oddnum=oddnum*10+digit;
-        reversednumber/=100;
-    } return oddnum;
+#include <iostream>
+
+using namespace std;
+
+void concat(int& num, int digit)
+{
+	num = num * 10 + digit;
 }
-int main(){
-    int a;
-    cin>>a;
-    cout<<even(a)<<endl;
-    cout<<odd(a);
+
+int reverse(int number) {
+	int res = 0;
+
+	while (number != 0) {
+		int digit = number % 10;
+		concat(res, digit);
+		number /= 10;
+	}
+
+	return res;
+}
+
+void evensAndOdds(int num, int& evens, int& odds)
+{
+	int reversed = reverse(num);
+	int idx = 1;
+
+	while (reversed != 0) {
+		int lastDigit = reversed % 10;
+
+		if (idx % 2 == 0) {
+			concat(evens, lastDigit);
+		}
+		else {
+			concat(odds, lastDigit);
+		}
+
+		idx++;
+		reversed /= 10;
+	}
+}
+
+int main() {
+	int a;
+	cin >> a;
+
+	int evens = 0, odds = 0;
+
+	evensAndOdds(a, evens, odds);
+
+	std::cout << evens << " " << odds << std::endl;
+
+	return 0;
 }
