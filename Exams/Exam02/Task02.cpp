@@ -1,9 +1,14 @@
 #include <iostream>
 
-constexpr size_t N = 50;
+constexpr size_t MAX_SIZE = 100;
 constexpr size_t CLOCK_SIZE = 3;
 
-void readMatrix(int mtx[][N], size_t rows, size_t cols)
+bool areValidDimensions(size_t rows, size_t cols)
+{
+	return rows > 2 && rows < MAX_SIZE && cols > 2 && cols && MAX_SIZE && rows == cols;
+}
+
+void readMatrix(int mtx[][MAX_SIZE], size_t rows, size_t cols)
 {
 	for (size_t i = 0; i < rows; i++)
 	{
@@ -14,7 +19,7 @@ void readMatrix(int mtx[][N], size_t rows, size_t cols)
 	}
 }
 
-int getRowSummation(const int mtx[][N], size_t row, size_t startX, size_t endX)
+int getRowSummation(const int mtx[][MAX_SIZE], size_t row, size_t startX, size_t endX)
 {
 	int rowSum = 0;
 
@@ -26,9 +31,7 @@ int getRowSummation(const int mtx[][N], size_t row, size_t startX, size_t endX)
 	return rowSum;
 }
 
-// This way our code is working for arbitrary size of the sand clock
-// Depending on what we give in CLOCK_SIZE
-int calculateSandClockSummation(const int mtx[][N], size_t startX, size_t endX, size_t startY, size_t endY)
+int calculateSandClockSummation(const int mtx[][MAX_SIZE], size_t startX, size_t endX, size_t startY, size_t endY)
 {
 	int sum = 0;
 
@@ -44,35 +47,47 @@ int calculateSandClockSummation(const int mtx[][N], size_t startX, size_t endX, 
 	return sum + mtx[i][startX];
 }
 
-void findSandClocks(const int mtx[][N], size_t rows, size_t cols,
+void findSandClocks(const int mtx[][MAX_SIZE], size_t rows, size_t cols,
 	size_t& centerX, size_t& centerY, int& maximumSummation)
 {
 	size_t outset = CLOCK_SIZE / 2;
-	size_t start = outset;
-	size_t end = rows - outset;
 
-	for (size_t i = start; i < end; i++)
+	size_t startX = outset, endX = rows - outset;
+	size_t startY = outset, endY = cols - outset;
+
+	while (startX < endX && startY < endY)
 	{
-		for (size_t j = start; j < end; j++)
-		{
-			int sum = calculateSandClockSummation(mtx, j - outset, j + outset, i - outset, i + outset);
+		int sum = calculateSandClockSummation(mtx, startX - outset, startX + outset, startY - outset, startY + outset);
 
-			if (sum > maximumSummation)
-			{
-				maximumSummation = sum;
-				centerX = j;
-				centerY = i;
-			}
+		if (sum > maximumSummation)
+		{
+			maximumSummation = sum;
+			centerX = startX;
+			centerY = startY;
+		}
+
+		startX++;
+
+		if (startX == endX)
+		{
+			startX = 0;
+			startY++;
 		}
 	}
 }
 
-int main()
+void sandClocks()
 {
 	size_t ROWS = 0, COLUMNS = 0;
 	std::cin >> ROWS >> COLUMNS;
 
-	int mtx[N][N]{ 0 };
+	if (!areValidDimensions(ROWS, COLUMNS))
+	{
+		std::cout << "Invalid matrix dimensions!" << std::endl;
+		return;
+	}
+
+	int mtx[MAX_SIZE][MAX_SIZE]{ 0 };
 
 	readMatrix(mtx, ROWS, COLUMNS);
 
@@ -84,6 +99,11 @@ int main()
 	std::cout << "Row: " << centerY << std::endl;
 	std::cout << "Column: " << centerX << std::endl;
 	std::cout << "Sum: " << maximumSummation << std::endl;
+}
+
+int main()
+{
+	sandClocks();
 
 	return 0;
 }
