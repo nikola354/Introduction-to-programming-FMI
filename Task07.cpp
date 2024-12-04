@@ -1,6 +1,6 @@
 #include <iostream>
 
-unsigned flipRightmostSetBit(int num) {
+unsigned flipRightmostSetBit(unsigned num) {
 	return num & (num - 1);
 }
 
