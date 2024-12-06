@@ -11,11 +11,11 @@ unsigned powerOfTwo(unsigned power)
 unsigned getNumFromBits(unsigned number, unsigned startIndex, unsigned length) 
 {
 	// shift само ако има смисъл, cast защото иначе unsigned overflows
-	if ((int)(startIndex - length) + 1 >= 0)
+	if (startIndex > length)
 		number = number >> startIndex - length + 1;
 	// намали дължината така че да вземе само останалите цифри
 	else
-		length = length - startIndex;
+		length = startIndex;
 
 	// степен на двойката 2^k 0001 0000, k = 4
 	// вадим 1 -> 0000 1111
