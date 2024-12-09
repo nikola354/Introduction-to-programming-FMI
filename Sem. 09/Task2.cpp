@@ -4,40 +4,38 @@ constexpr int DIFFERENCE = ('a' - 'A');
 
 void printArr(const char *arr) {
   if(!arr) return;
-  std::cout << '\n';
-  while (*arr != '\0')
-  {
+  
+  while (*arr != '\0'){
     std::cout << *arr;
     arr++;
   }
   std::cout << '\n';
 }
 
-void toUpper(char *str) {
-  if(!str) return;
-  while(*str != '\0') {
-    if(*str >= 'a' && *str <= 'z') {
-      (*str) -= DIFFERENCE; 
-    }
-    str++;
-  }
+bool isLower(char letter) {
+  return (letter >= 'a' && letter <= 'z');
 }
-void toLower(char *str) {
+bool isUpper(char letter) {
+  return (letter >= 'A' && letter <= 'Z');
+}
+void convertString(char *str) {
   if(!str) return;
+
   while(*str != '\0') {
-    if(*str >= 'A' && *str <= 'Z') {
+    if(isLower(*str)) {
+      (*str) -= DIFFERENCE; 
+    } else if(isUpper(*str)) {
       (*str) += DIFFERENCE; 
     }
     str++;
   }
 }
 
+
 int main() {
-  char str[] = "HeLlo WORLD!";
-  toUpper(str);
-  printArr(str);
-  toLower(str);
-  printArr(str);
+  char str[] = "HaLlo WORLD!";
+  convertString(str);
+  std::cout << str;
 
   return 0;
 }
