@@ -1,11 +1,23 @@
 #include <iostream>
 using namespace std;
 constexpr int MAX=1024;
+int len(const char * text){
+    int len=0;
+    while(*text){
+        len++;
+        text++;
+    } return len;
+}
 void insertSymbol( const char* text, char* result, char symbol, unsigned int index){
     unsigned int currentIndex=0;
+    if(!text || !result) return;
+    int lengthText=len(text);
+    if((lengthText - 1)<index) {
+        cout<< "invalid index!";
+        return;
+    }
     while(*text){
-
-       if (currentIndex==index){
+    if (currentIndex==index){
         *result=symbol;
         result++;
        }
