@@ -9,6 +9,8 @@ bool isSpaceOrPunctuation(char a){
 
 void strToMatrix(char *str, char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
     if(!str || !matrix) return;
+    
+    const char nullTerminator='\0';
 
     int symbol = 0;
     int word = 0;
@@ -22,8 +24,8 @@ void strToMatrix(char *str, char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
         }
         else{
             if(inWord) {
+            matrix[word][symbol]=nullTerminator;
             word++;
-            matrix[word][symbol]='\0';
             symbol=0;
             }
 
@@ -31,7 +33,7 @@ void strToMatrix(char *str, char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
         }
         
     }
-    matrix[word][symbol] = '\0';
+    matrix[word][symbol] = nullTerminator;
 }
 void printMatrix(char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
     for(int i = 0; i < MAX_WORDS && matrix[i][0] != '\0'; i++){
@@ -39,6 +41,7 @@ void printMatrix(char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
     }
 }
 int main(){
+
     char str[MAX_STR];
     char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS];
     cin.getline(str,MAX_STR);

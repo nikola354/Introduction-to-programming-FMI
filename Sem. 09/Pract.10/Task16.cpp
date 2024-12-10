@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std; 
+constexpr int MAX=1000;
 void swap(int & ptr1, int &ptr2){
     int temp=ptr1;
     ptr1=ptr2;
@@ -34,7 +35,7 @@ void sortCharacters(const char* str, char* result){
 }
 int main(){
     const char* str="Hello World!";
-    char result[1024]{'\0'};
+    char result[MAX]{'\0'};
     sortCharacters(str,result);
     cout<<result;
 }
