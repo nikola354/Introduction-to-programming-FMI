@@ -2,16 +2,19 @@
 using namespace std;
 constexpr int MAX=100000;
 char digitToChar(int digit){
-    char a;
+    char a = '\0';
     if(digit>=0 && digit<=9){
      a = digit + '0'; 
-    } return a;
+    } 
+    return a;
 }
 
 int charToDigit(char a){
+    int n = 0;
     if(a >= '0' && a<= '9') {
-        return a - '0';
+        n = a - '0';
     }
+    return n;
 }
 
 void getDigitOccurences (const char* digit, char* result){
