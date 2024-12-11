@@ -3,6 +3,9 @@ using namespace std;
 constexpr int MAX_STR=10000;
 constexpr int MAX_WORDS=100;
 constexpr int MAX_SYMBOLS_WORDS=1024;
+
+const char NULL_TERMINATOR = '\0';
+
 bool isSpaceOrPunctuation(char a){
     return (a>=32 && a<=47 || a>=58 && a<=64 || a>=91 && a<=96 || a>=123 && a<=126);
 }
@@ -10,8 +13,6 @@ bool isSpaceOrPunctuation(char a){
 void strToMatrix(char *str, char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
     if(!str || !matrix) return;
     
-    const char nullTerminator='\0';
-
     int symbol = 0;
     int word = 0;
     bool inWord = false;
@@ -24,7 +25,7 @@ void strToMatrix(char *str, char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
         }
         else{
             if(inWord) {
-            matrix[word][symbol]=nullTerminator;
+            matrix[word][symbol]=NULL_TERMINATOR;
             word++;
             symbol=0;
             }
@@ -33,7 +34,7 @@ void strToMatrix(char *str, char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
         }
         
     }
-    matrix[word][symbol] = nullTerminator;
+    matrix[word][symbol] = NULL_TERMINATOR;
 }
 void printMatrix(char matrix[MAX_WORDS][MAX_SYMBOLS_WORDS]){
     for(int i = 0; i < MAX_WORDS && matrix[i][0] != '\0'; i++){
