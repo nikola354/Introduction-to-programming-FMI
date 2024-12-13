@@ -1,21 +1,35 @@
-#include <iostream>
+#include <iostream>;
 
-using namespace std;
+unsigned powerOfTwo(unsigned power)
+{
+	if (power > 31)
+		return 0;
 
-int main(){
-    int x, m, n; //23 4 3
-    cin >> x >> m >> n;
+	return 1 << power;
+}
 
-    if (m - n < -1) { //to cover cases such as 23 1 5 (we take the last 2 bits)
-        int mask = 1 << (m + 1);
-        mask--;
-        cout << (x & mask);
-        return 0;
-    }
+unsigned getNumFromBits(unsigned number, unsigned startIndex, unsigned length) 
+{
+	// shift само ако има смисъл, cast защото иначе unsigned overflows
+	if (startIndex > length)
+		number = number >> startIndex - length + 1;
+	// намали дължината така че да вземе само останалите цифри
+	else
+		length = startIndex;
 
-    int mask = 1 << n; //mask = (1000)
-    mask--; //mask = (111)
-    x >>= (m - n + 1);  //23 = (10111) => 101
+	// степен на двойката 2^k 0001 0000, k = 4
+	// вадим 1 -> 0000 1111
+	unsigned mask = powerOfTwo(length) - 1; // 0000 1111
 
-    cout << (x & mask); // 101 & 111
+	// побитово &
+	// 1011 1001
+	// 0000 1111
+	return number & mask;
+}
+
+int main()
+{
+	unsigned x, m, n;
+	std::cin >> x >> m >> n;
+	std::cout << getNumFromBits(x, m, n);
 }
