@@ -1,21 +1,20 @@
+#include <iostream>
+
 int charToDigit(char ch)
 {
 	if (ch >= 'A' && ch <= 'Z')
 		return 10 + (ch - 'A');
 	else if (ch >= '0' && ch <= '9')
 		return ch - '0';
-	else 
-		return -1;
 
-	return 0;
+	return -1;
 }
 
-int getLength(const char* src)
+unsigned int getLength(const char* src)
 {
-	if (!src) 
-		return -1;
+	if (!src) return 0;
 
-	unsigned length = 0;
+	unsigned int length = 0;
 
 	while (*src)
 	{
@@ -28,19 +27,26 @@ int getLength(const char* src)
 
 int fromAnyBaseToDecimal(const char* src, unsigned srcBase)
 {
-	if (!src) 
-		return -1;
+	if (!src) return -1;
 
-	int result = 0, multiplyer = 1, srcLength = getLength(src);
+	int result = 0, mult = 1, srcLength = getLength(src);
 
-	for (int index = srcLength - 1; index >= 0; index--, multiplyer *= srcBase)
+	for (int index = srcLength - 1; index >= 0; index--, mult *= srcBase)
 	{
 		int nextDigit = charToDigit(src[index]);
-		if (nextDigit < 0) 
-			return -1;
-			
-		result += multiplyer * nextDigit;
+		
+		if (nextDigit < 0) return -1;
+
+		result += mult * nextDigit;
 	}
 
 	return result;
+}
+
+int main()
+{
+	std::cout << fromAnyBaseToDecimal("IC7", 24) << std::endl;
+	std::cout << fromAnyBaseToDecimal("11001", 2) << std::endl;
+
+	return 0;
 }
