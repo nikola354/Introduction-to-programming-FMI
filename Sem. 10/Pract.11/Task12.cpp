@@ -1,25 +1,40 @@
 #include <iostream>;
 
-void getLongestPrefix(const char * const * mtx, char * result) {
-    if (!mtx || !result || !mtx[0]) {
-        *result = '\0';
-        return;
-    }
+constexpr size_t SIZE = 1024;
 
-    const char* firstWord = mtx[0];
-    unsigned prefixLength = 0;
+void getLongestPrefix(const char* const* mtx, char* result) 
+{
+	if (!mtx || !result) return;
 
-    while (true) {
-        char currentChar = firstWord[prefixLength];
+	const char* firstWord = mtx[0];
+	unsigned prefixLength = 0;
 
-        for (unsigned i = 0; mtx[i]; ++i) {
-            if (!mtx[i][prefixLength] || mtx[i][prefixLength] != currentChar) {
-                result[prefixLength] = '\0';
-                return;
-            }
-        }
+	while (true) 
+	{
+		char currentChar = firstWord[prefixLength];
 
-        result[prefixLength] = currentChar;
-        ++prefixLength;
-    }
+		for (unsigned i = 0; mtx[i] != nullptr; i++) 
+		{
+			if (mtx[i][prefixLength] != currentChar) 
+			{
+				result[prefixLength] = '\0';
+				return;
+			}
+		}
+
+		result[prefixLength++] = currentChar;
+	}
+}
+
+int main()
+{
+	// another variant would be to pass an additional variable rows to the function
+	const char* mtx[4]{ "flower", "flow", "flight", nullptr };
+	char result[SIZE]{ '\0' };
+
+	getLongestPrefix(mtx, result);
+
+	std::cout << result << std::endl;
+
+	return 0;
 }
