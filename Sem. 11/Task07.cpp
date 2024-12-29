@@ -2,14 +2,14 @@
 using namespace std;
 
 //
-void PrintResult(int* arr, unsigned size) {
+void printResult(int* arr, unsigned size) {
 	if (!arr)return;
 
 	for (unsigned i = 0; i < size; i++) {
 		cout << arr[i] << " ";
 	}
 }
-void RearrangeArray(int* arr, unsigned size, int element) {
+void rearrangeArray(int* arr, unsigned size, int element) {
 	if (!arr) return;
 	int* result = new int[size];
 	unsigned resultIndex = 0;
@@ -31,7 +31,7 @@ void RearrangeArray(int* arr, unsigned size, int element) {
 				result[resultIndex++] = arr[i];
 			}
 	}
-	PrintResult(result, size);
+	printResult(result, size);
 	delete[] result;
 }
 int main() {
@@ -56,7 +56,7 @@ int main() {
 		if(!isElement) cout << "Invalid input! Enter element: ";
 	} 
 	while (!isElement);
-	RearrangeArray(arr, size, element);
+	rearrangeArray(arr, size, element);
 
 	cout << endl;
 }
