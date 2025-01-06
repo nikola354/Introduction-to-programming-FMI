@@ -2,42 +2,41 @@
 
 char toLower(char ch)
 {
-    return (ch >= 'A' && ch <= 'Z') ? ch + ('a' - 'A') : ch;
+	return (ch >= 'A' && ch <= 'Z') ? ch + ('a' - 'A') : ch;
 }
 
-
 bool isPrefix(const char* pattern, const char* text) {
-    if (!pattern || !text)
-        return false;
+	if (!pattern || !text)
+		return false;
 
-    while (*pattern && *text && (toLower(*pattern) == toLower(*text))) {
-        pattern++;
-        text++;
-    }
+	while (*pattern && *text && (toLower(*pattern) == toLower(*text))) {
+		pattern++;
+		text++;
+	}
 
-    return !*pattern;
+	return !*pattern;
 }
 
 void censor(char* text, const char* substring) {
-    if (!text || !substring)
-        return;
+	if (!text || !substring)
+		return;
 
-    char* start = text;
-    int subLen = 0;
+	char* start = text;
+	int subLen = 0;
 
-    while (substring[subLen]) 
+	while (substring[subLen])
 		subLen++;
 
-    while (*start) {
-        if (isPrefix(substring, start)) {
-            for (int i = 0; i < subLen; i++)
-                start[i] = '*';
+	while (*start) {
+		if (isPrefix(substring, start)) {
+			for (int i = 0; i < subLen; i++)
+				start[i] = '*';
 
-            start += subLen;
-        } 
+			start += subLen;
+		}
 		else
-            start++;
-    }
+			start++;
+	}
 }
 
 int main() {
