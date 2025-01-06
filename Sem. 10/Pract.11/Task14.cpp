@@ -1,4 +1,4 @@
-#include <iostream>;
+#include <iostream>
 
 char toLower(char ch)
 {
@@ -6,35 +6,43 @@ char toLower(char ch)
 }
 
 
-bool isPrefix(const char* pattern, char* text) {
-	if (!pattern || !text)
-		return 0;
+bool isPrefix(const char* pattern, const char* text) {
+    if (!pattern || !text)
+        return false;
 
-	while (*pattern && *text && (toLower(*pattern) == toLower(*text)))
-	{
-		*text = '*';
-		pattern++;
-		text++;
-	}
+    while (*pattern && *text && (toLower(*pattern) == toLower(*text))) {
+        pattern++;
+        text++;
+    }
 
-	return !*pattern;
+    return !*pattern;
 }
 
-void censor(char* text, const char* substring)
-{
-	if (!text || !substring)
-		return;
+void censor(char* text, const char* substring) {
+    if (!text || !substring)
+        return;
 
-	while (*text)
-	{
-		isPrefix(substring, text);
-		text++;
-	}
+    char* start = text;
+    int subLen = 0;
+
+    while (substring[subLen]) 
+		subLen++;
+
+    while (*start) {
+        if (isPrefix(substring, start)) {
+            for (int i = 0; i < subLen; i++)
+                start[i] = '*';
+
+            start += subLen;
+        } 
+		else
+            start++;
+    }
 }
 
 int main() {
-	char text[] = "Must love FMI. hates fmi.";
-	char substring[] = "fMi";
+	char text[] = "Howdy! How are you? How was your day?";
+	char substring[] = "How";
 	censor(text, substring);
 	std::cout << text;
 }
