@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int** AllocateMatrix(unsigned rows, unsigned cols) {
-
+int** allocateMatrix(unsigned rows, unsigned cols) {
 	int** matrix = new int*[rows];
 	for (unsigned i = 0; i < rows; i++) {
 		matrix[i] = new int[cols];
@@ -10,7 +9,7 @@ int** AllocateMatrix(unsigned rows, unsigned cols) {
 	return matrix;
 }
 
-void ReadMatrix(int** matrix, unsigned rows, unsigned cols) {
+void readMatrix(int** matrix, unsigned rows, unsigned cols) {
 	if (!matrix)return;
 
 	for (unsigned i = 0; i < rows; i++) {
@@ -20,7 +19,7 @@ void ReadMatrix(int** matrix, unsigned rows, unsigned cols) {
 	}
 }
 
-void PrintMatrix(int** result, unsigned rows, unsigned cols) {
+void printMatrix(const int *const *result, unsigned rows, unsigned cols) {
 	if (!result)return;
 
 	for (unsigned i = 0; i < rows; i++) {
@@ -31,7 +30,7 @@ void PrintMatrix(int** result, unsigned rows, unsigned cols) {
 	}
 }
 
-void FreeMatrix(int** matrix, unsigned rows) {
+void freeMatrix(int** matrix, unsigned rows) {
 	if (!matrix)return;
 
 	for (unsigned i = 0; i < rows; i++) {
@@ -40,15 +39,13 @@ void FreeMatrix(int** matrix, unsigned rows) {
 	delete[] matrix;
 }
 
-void MultiplyTwoMatrices (int** matr1, int** matr2, unsigned rows1, unsigned cols1, unsigned cols2) {
+int ** multiplyTwoMatrices (const int *const * matr1, const int *const * matr2, unsigned rows1, unsigned cols1, unsigned cols2) {
 	if (!matr1 || !matr2)return;
 
-	int** result = AllocateMatrix(rows1, cols2);
+	int** result = allocateMatrix(rows1, cols2);
 
 	for (unsigned i = 0; i < rows1; i++) {
-
 		for (unsigned j = 0; j < cols2; j++) {
-
 			result[i][j] = 0;
 
 			for (unsigned k = 0; k < cols1; k++) {
@@ -57,9 +54,8 @@ void MultiplyTwoMatrices (int** matr1, int** matr2, unsigned rows1, unsigned col
 			}
 		}
 	}
-	PrintMatrix(result, rows1, cols2);
 
-	FreeMatrix(result, rows1);
+	return result;
 }
 
 int main() {
@@ -78,19 +74,21 @@ int main() {
 	cout << "Enter Q: " << endl;
 	cin >> Q;
 
-	int** matrix1 = AllocateMatrix(N, M);
-	int** matrix2 = AllocateMatrix(P, Q);
+	int** matrix1 = allocateMatrix(N, M);
+	int** matrix2 = allocateMatrix(P, Q);
 
 	cout << "Enter the first matrix: " << endl;
-	ReadMatrix(matrix1, N, M);
+	readMatrix(matrix1, N, M);
 
 	cout << "Enter the second matrix: " << endl;
-	ReadMatrix(matrix2, P, Q);
+	readMatrix(matrix2, P, Q);
 
-	MultiplyTwoMatrices(matrix1, matrix2, N, M, Q);
-
-	FreeMatrix(matrix1, N);
-	FreeMatrix(matrix2, P);
+	int ** result = multiplyTwoMatrices(matrix1, matrix2, N, M, Q);
+	printMatrix(result, N, Q);
+	
+	freeMatrix(result, N);
+	freeMatrix(matrix1, N);
+	freeMatrix(matrix2, P);
 
 	return 0;
 }
