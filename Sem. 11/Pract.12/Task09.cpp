@@ -1,12 +1,15 @@
 #include <iostream>
 using namespace std;
 
-void readMatrix(int** matrix, int rows, int cols) {
+int** readMatrix(int rows, int cols) {
+	int** matrix = new int* [rows];
 	for (int i = 0; i < rows; i++) {
+		matrix[i] = new int[cols];
 		for (int j = 0; j < cols; j++) {
 			cin >> matrix[i][j];
 		}
 	}
+	return matrix;
 }
 
 bool doesExist(const int* const* edgesMatrix, int edgesCount, int n, int k) {
@@ -22,18 +25,19 @@ bool doesExist(const int* const* edgesMatrix, int edgesCount, int n, int k) {
 	return false;
 }
 
-int** matrixGraph(const int* const* edges, int edgesCount, int size) {
+int** matrixGraph(const int* const* edges, int maxNodeIndexFromEdges) {
 	if (!edges) {
 		return nullptr;
 	}
 
-	int** matrixGraph = new int* [size];
+	int matrixSize = maxNodeIndexFromEdges + 1;
+	int** matrixGraph = new int* [matrixSize];
 
-	for (int i = 0; i < size; i++) {
-		matrixGraph[i] = new int[size];
+	for (int i = 0; i < matrixSize; i++) {
+		matrixGraph[i] = new int[matrixSize];
 
-		for (int j = 0; j < size; j++) {
-			if (doesExist(edges, edgesCount, i, j) || doesExist(edges, edgesCount, j, i)) {
+		for (int j = 0; j < matrixSize; j++) {
+			if (doesExist(edges, maxNodeIndexFromEdges, i, j) || doesExist(edges, maxNodeIndexFromEdges, j, i)) {
 				matrixGraph[i][j] = 1;
 			}
 			else {
@@ -58,31 +62,27 @@ void printMatrix(const int* const* matrix, int rows, int cols) {
 	}
 
 }
+
+void freeMatrix(const int* const* matrix, int rows) {
+	
+	for (int i = 0; i < rows; i++) {
+		delete[] matrix[i];
+	}
+	delete[] matrix;
+}
+
+
 int main()
 {
-	int edgesCount;
-	cin >> edgesCount;
-	int size;
-	cin >> size;
+	int maxNodeIndexFromEdges;
+	cin >> maxNodeIndexFromEdges;
+	
+	int** edges = readMatrix(maxNodeIndexFromEdges, 2);
+	int** result = matrixGraph(edges, maxNodeIndexFromEdges);
 
-	int** edges = new int* [edgesCount];
-	for (int i = 0; i < edgesCount; i++) {
-		edges[i] = new int[2];
-	}
-	readMatrix(edges, edgesCount, 2);
+	int matrixGraphSize = maxNodeIndexFromEdges + 1;
+	printMatrix(result, matrixGraphSize, matrixGraphSize);
 
-	int** result = matrixGraph(edges, edgesCount, size);
-
-	printMatrix(result, size, size);
-
-	for (int i = 0; i < size; i++) {
-		delete[] result[i];
-	}
-
-	delete[] result;
-
-	for (int i = 0; i < edgesCount; i++) {
-		delete[] edges[i];
-	}
-	delete[] edges;
+	freeMatrix(result, matrixGraphSize);
+	freeMatrix(edges, maxNodeIndexFromEdges);
 }
