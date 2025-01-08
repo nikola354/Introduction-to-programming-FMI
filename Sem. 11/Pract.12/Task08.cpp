@@ -1,10 +1,12 @@
 #include <iostream>
 using namespace std;
 
-void readArr(size_t* arr, size_t size) {
+size_t* readArr(size_t size) {
+    size_t* arr = new size_t[size];
     for (size_t i = 0; i < size; i++) {
         cin >> arr[i];
     }
+    return arr;
 }
 
 void reverseNum(size_t& num) {
@@ -50,7 +52,7 @@ void sortLex(size_t*& nums, size_t N) {
         return;
     }
 
-    for (size_t i = 0; i < N; i++) {
+    for (size_t i = 0; i < N-1; i++) {
         size_t smallest = i;
         for (int j = i + 1; j < N; j++) {
             if (compareLex(nums[smallest], nums[j]) > 0) {
@@ -76,8 +78,7 @@ int main()
     size_t size;
     cin >> size;
 
-    size_t* arr = new size_t[size];
-    readArr(arr, size);
+    size_t* arr = readArr(size);
     sortLex(arr, size);
     printArr(arr, size);
 
