@@ -1,14 +1,20 @@
 #include <iostream>
 using namespace std;
 
-void readArr(int* arr, size_t len) {
+ int* readArr(size_t len) {
+     int* arr = new int[len];
     for (int i = 0; i < len; i++) {
         cin >> arr[i];
     }
+    return arr;
 }
 
-void inserAt(int*& arr, size_t& len, int index, int elem) {
+void insertAt(int*& arr, size_t& len, int index, int elem) {
     if (!arr) {
+        return;
+    }
+
+    if (index < 0 || index > len) {
         return;
     }
 
@@ -30,7 +36,11 @@ void inserAt(int*& arr, size_t& len, int index, int elem) {
 }
 
 void removeAt(int*& arr, size_t& len, int index) {
-    if (!arr || index >= len) {
+    if (!arr) {
+        return;
+    }
+
+    if (index < 0 || index >= len) {
         return;
     }
 
@@ -66,9 +76,8 @@ int main()
 {
     size_t len;
     cin >> len;
-    int* arr = new int[len];
-    readArr(arr, len);
-    inserAt(arr, len, 4, 123);
+    int* arr = readArr(len);
+    insertAt(arr, len, 4, 123);
     removeAt(arr, len, 1);
     printArr(arr, len);
 
