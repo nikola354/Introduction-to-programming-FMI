@@ -1,9 +1,11 @@
 #include <iostream>
 using namespace std;
 
-void enterMatrix(int** matrix, int n, int m);
+int** createMatrix(int rows, int cols);
 
 int getRowSum(const int* const* matrix, int row, int cols);
+
+void rowsSwap(int** matrix, int from, int to);
 
 void removeOddRows(int** matrix, int& n, int m);
 
@@ -13,8 +15,7 @@ int main() {
     int n, m;
     cin >> n >> m;
 
-    int** matrix = new int* [n];
-    enterMatrix(matrix, n, m);
+    int** matrix = createMatrix(n, m);
 
     removeOddRows(matrix, n, m);
 
@@ -27,18 +28,18 @@ int main() {
     delete[] matrix;
 }
 
-void enterMatrix(int** matrix, int n, int m) {
-    if (!matrix) {
-        return;
-    }
+int** createMatrix(int rows, int cols) {
+    int** matrix = new int* [rows];
 
-    for (int i = 0; i < n; i++) {
-        matrix[i] = new int [m];
+    for (int i = 0; i < rows; i++) {
+        matrix[i] = new int [cols];
 
-        for (int j = 0; j < m; j++) {
+        for (int j = 0; j < cols; j++) {
             cin >> matrix[i][j];
         }
     }
+
+    return matrix;
 }
 
 int getRowSum(const int* const* matrix, int row, int cols) {
@@ -54,6 +55,16 @@ int getRowSum(const int* const* matrix, int row, int cols) {
     return sum;
 }
 
+void rowsSwap(int** matrix, int from, int to) {
+    if (!matrix) {
+        return;
+    }
+
+    int* temp = matrix[from];
+    matrix[from] = matrix[to];
+    matrix[to] = temp;
+}
+
 void removeOddRows(int** matrix, int& n, int m) {
     if (!matrix) {
         return;
@@ -63,10 +74,7 @@ void removeOddRows(int** matrix, int& n, int m) {
         int sum = getRowSum(matrix, i, m);
 
         if  (sum % 2 != 0) {
-            int* temp = matrix[i];
-            matrix[i] = matrix[n - 1];
-            matrix[n - 1] = temp;
-
+            rowsSwap(matrix, i, n - 1);
             n--;
         } else {
             i++;
