@@ -1,107 +1,101 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SIZE = 100;
-const char TERMINATE_SYMBOL = '\0';
+constexpr int MAX_SIZE = 100;
+constexpr char TERMINATE_SYMBOL = '\0';
 
 bool isDigit(char s);
 
 int getDigitsCount(const char* str);
 
-int getNumbersCount(const char*  str);
+int getNumbersCount(const char* str);
 
 int getStringLength(const char* str);
 
 char* censoreNumbers(const char* str);
 
 int main() {
-    char str[MAX_SIZE];
-    cin.getline(str, MAX_SIZE);
+	char str[MAX_SIZE];
+	cin.getline(str, MAX_SIZE);
 
-    char* result = censoreNumbers(str);
+	char* result = censoreNumbers(str);
 
-    cout << result << endl;
+	cout << result << endl;
 
-    delete[] result;
-    return 0;
+	delete[] result;
+	return 0;
 }
 
 bool isDigit(char s) {
-    if (s >= '0' && s <= '9') {
-        return true;
-    }
-
-    return false;
+	return s >= '0' && s <= '9';
 }
 
 int getDigitsCount(const char* str) {
-    if (!str) {
-        return 0;
-    }
+	if (!str) {
+		return 0;
+	}
 
-    int count = 0;
-    while (*str != TERMINATE_SYMBOL) {
-        if (isDigit(*str)) {
-            count++;
-        }
-        str++;
-    }
+	int count = 0;
+	while (*str != TERMINATE_SYMBOL) {
+		if (isDigit(*str)) {
+			count++;
+		}
+		str++;
+	}
 
-    return count;
+	return count;
 }
 
-int getNumbersCount(const char*  str) {
-    if (!str) {
-        return 0;
-    }
+int getNumbersCount(const char* str) {
+	if (!str) {
+		return 0;
+	}
 
-    int count = 0;
-    while (*str != TERMINATE_SYMBOL) {
-        if (isDigit(*str) && !isDigit(*(str + 1))) {
-            count++;
-        }
-        str++;
-    }
+	int count = 0;
+	while (*str != TERMINATE_SYMBOL) {
+		if (isDigit(*str) && !isDigit(*(str + 1))) {
+			count++;
+		}
+		str++;
+	}
 
-    return count;
+	return count;
 }
 
 int getStringLength(const char* str) {
-    if (!str) {
-        return 0;
-    }
+	if (!str) {
+		return 0;
+	}
 
-    int length = 0;
-    while (*str != TERMINATE_SYMBOL) {
-        length++;
-        str++;
-    }
+	int length = 0;
+	while (*str != TERMINATE_SYMBOL) {
+		length++;
+		str++;
+	}
 
-    return length;
+	return length;
 }
 
 char* censoreNumbers(const char* str) {
-    if (!str) {
-        return nullptr;
-    }
+	if (!str) {
+		return nullptr;
+	}
 
-    int length = getStringLength(str) - getDigitsCount(str) + getNumbersCount(str);
-    char* result = new char [length + 1]; // +1 for terminate symbol
+	int length = getStringLength(str) - getDigitsCount(str) + getNumbersCount(str);
 
-    int index = 0;
-    while (*str != TERMINATE_SYMBOL) {
-        if (isDigit(*str)) {
-            if (!isDigit(*(str + 1))) {
-                result[index++] = '*';
-            }
-        } else {
-            result[index++] = *str;
-        }
+	char* result = new char[length + 1]; // +1 for terminate symbol
+	result[length] = TERMINATE_SYMBOL;
 
-        str++;
-    }
+	int index = 0;
 
-    result[index] = TERMINATE_SYMBOL;
+	while (*str != TERMINATE_SYMBOL) {
+		if (!isDigit(*str))
+			result[index++] = *str;
+		else if (!isDigit(*(str + 1)))
+			result[index++] = '*';
 
-    return result;
+		str++;
+	}
+
+	return result;
 }
